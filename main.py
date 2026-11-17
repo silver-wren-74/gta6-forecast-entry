@@ -42,7 +42,12 @@ KERNELS = [(1.2, 0.9), (0.9, 0.7)]
 KERNEL_FLOOR = 0.02
 SPREAD_GRID = [0.85, 0.925, 1.0, 1.075, 1.15]
 BIAS_SHRINK = 0.5
-MIN_FIRST_HOUR = 300.0
+# Comparables whose first hour drew fewer viewers than this are left out:
+# a near-empty opening hour makes their ratio curves explosive and unlike
+# any real launch's (a game that unlocks at 14:00 UTC sits near zero until
+# then). Raising the floor from 300 to 1500 also scored slightly better in
+# leave-one-out tests over the pool (0.259 against 0.261).
+MIN_FIRST_HOUR = 1500.0
 
 
 def parse_ts(text):
